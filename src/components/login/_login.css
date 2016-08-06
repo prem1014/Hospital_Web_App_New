@@ -1,0 +1,35 @@
+.login-form-continer{
+        background-color: #9E9E9E;
+    border-radius: 5px;
+    -webkit-box-shadow: 14px 9px 84px 16px rgba(0,0,0,0.75);
+    -moz-box-shadow: 14px 9px 84px 16px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 101px 15px rgb(158, 158, 158);
+        margin-top: 10px;
+}
+
+#LoginHeader{
+    background: #2196F3;
+    height: 40px;
+    width: 100%;
+}
+
+#LoginHeader>h4{
+
+    width: 29%;
+    margin: auto;
+    /* position: relative; */
+    /* top: 12px; */
+    line-height: 39px;
+    letter-spacing: 0.2px;
+    color: white;
+    font-family: sans-serif;
+}
+
+@media screen and (max-width: 420x) 
+ { 
+        .LoginHeader h4{
+        width:22%;
+        margin:auto;
+    }
+}
+

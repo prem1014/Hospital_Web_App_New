@@ -1,0 +1,145 @@
+<div class="col-lg-12">
+    <div class="form-continer">
+        <div id="formHeader">
+            <h4>Bill Entry Form</h4>
+        </div>
+        <form class="form-horizontal" role="form" style="margin:10px;" name="searchForm" novalidate>
+            <div class="form-group search-section">
+                <div>
+                    <label class="control-label col-sm-2" for="pId">Patient ID/Bill No:</label>
+                </div>
+                <div class="col-sm-4">
+                    <div class="inner-addon right-inner-addon">
+                        <i class="glyphicon glyphicon-search"></i>
+                        <input type="text" class="form-control" ng-model="searchItem" name="searchItem" placeholder="Enter Patient Id or Bill No to search" ng-keypress="search($event)" required ng-class="{'form-error':srchFrmSubmitted && searchForm.searchItem.$error.required}">
+                        <span class="error-message" ng-show="srchFrmSubmitted && searchForm.searchItem.$error.required">Enter valid Patient Id or Bill No to search </span>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <img src="../Image/012_refresh-128.png" style="width:23%;cursor:pointer" ng-click="refreshData()" />
+                </div>
+            </div>
+        </form>
+        <form class="form-horizontal" role="form" style="margin:10px;" name="billForm" novalidate>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="patientId">Patient ID:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="patientId" name="patientId" readonly />
+                </div>
+                <label class="control-label col-sm-2" for="patientName">Patient Name:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="patientName" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="billNo">Bill No:</label>
+                <div class="col-sm-4">
+                    <input type="text" ng-model="billNo" class="form-control" readonly />
+                </div>
+                <label class="control-label col-sm-2" for="attendantName">Attendant Name:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" readonly ng-model="attendantName">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="billDate">Bill Date:</label>
+                <div class="col-sm-4">
+                    <p class="input-group" style="margin: 0 0 0px;">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup.opened"
+                               datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDatePickerPopup()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+                <label class="control-label col-sm-2" for="contactNo">Contact No/Type:</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" ng-model="contactNo" readonly />
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" ng-model="patientType" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="pType">Remarks:</label>
+                <div class="col-sm-4">
+                    <input type="text" ng-model="remarks" class="form-control"/>
+                </div>
+                <label class="control-label col-sm-2" for="age">Age/Sex:</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" readonly ng-model="age">
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" ng-model="sex" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="bill-details">
+                <div class="form-group" style="margin-top:10px;">
+                    <label class="control-label col-sm-2" for="pType">Bill Item:</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" ng-options="item.Code as item.Description for item in chargeList" ng-model="chargeName" ng-change="getRate()"></select>
+                    </div>
+                    <label class="control-label col-sm-2" for="rate">Quantity/Rate:</label>
+                    <div class="col-sm-2">
+                        <input type="number" ng-model="quantity" class="form-control" name="quantity" min="0" placeholder="Enter quantity" style="width: 95%;"/>
+                        <!--<span class="error-message" ng-show="billItemFrmSubmitted && billForm.quantity.$error.required">Please enter quantity</span>-->
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="number" ng-model="rate" class="form-control" style="width: 95%;" min="0"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="paymentMode">Test Lab:</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" ng-options="item.Code as item.Name for item in labList" ng-model="labName"></select>
+                    </div>
+                    <label class="control-label col-sm-2" for="discount">Discount:</label>
+                    <div class="col-sm-2">
+                        <input type="number" ng-model="discount" class="form-control" min="0" placeholder="Enter discount amount, if any" style="width: 98%;" />
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary" ng-click="addBillItem()">Add Bill Item</button>
+                    </div>
+                </div>
+            </div>
+            <datagrid headers="listOfHeaders" data="billItems"></datagrid>
+
+            <div style="background: #00BCD4;margin-bottom: 12px;border: 6px solid green;">
+                <div class="form-group" style="margin:2px;margin:10px 0px 10px 0px;">
+                    <label class="control-label col-sm-2" for="totalAmount">Total Amount:</label>
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="totalAmount" class="form-control" readonly />
+                    </div>
+                    <label class="control-label col-sm-2" for="payNow">Pay Now:</label>
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="payNow" class="form-control" name="payNow" required ng-class="{'form-error':billFrmSubmitted && billForm.payNow.$error.required}" />
+                        <span class="error-message" ng-show="billFrmSubmitted && billForm.quantity.$error.required">Please enter pay now amount</span>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-panel">
+                <div class="form-group" style="margin-top:11px;">
+                    <div class="col-sm-2">
+
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-success" style="margin-bottom:5px;" ng-click="addNewBill()" ng-disabled="isAddPatientDisabled">Add New Bill</button>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-info" style="margin-bottom:5px;" ng-click="updateBill()" ng-disabled="isUpdateDisabled">Update Bill</button>
+                    </div>
+                    <div class="col-sm-1">
+                        <button type="button" class="btn btn-info" style="margin-bottom:5px; width:50px" ng-click="printData()" ng-disabled="isDisabled">Print</button>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-danger" style="margin-bottom:5px;" ng-click="deleteBill()" ng-disabled="isDeleteDisabled">Delete Bill</button>
+                    </div>
+                </div>
+            </div>
+            <print-data></print-data>
+        </form>
+    </div>
+    <div class="loading-image-container" ng-if="isLoading">
+        <img src="../Image/loading.gif" class="loading-image" />
+    </div>
+</div>

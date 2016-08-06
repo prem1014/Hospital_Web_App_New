@@ -1,0 +1,129 @@
+<div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="sign-from-container">
+            <div id="signUpHeader">
+                <h4>Sign Up Form</h4>
+            </div>
+            <div class="signUp" style="margin: 20px;">
+               <!-- <form name="myform" novalidate class="form">
+                    <div class="form-group">
+                        <label for="txtFname">First Name:</label>
+                        <div class="left-inner-addon">
+                            <i class="glyphicon glyphicon-user icon-user"></i>
+                            <input type="text" class="form-control" placeholder="First Name" ng-model="txtFname" name="txtFname" required ng-class="{'form-error':submitted && myform.txtFname.$error.required}" />
+                            <span class="error-message" ng-show="submitted && myform.txtFname.$error.required">Please enter your name.</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtLname">Last Name:</label>
+                        <div class="left-inner-addon">
+                            <i class="glyphicon glyphicon-user icon-user"></i>
+                            <input type="text" class="form-control" placeholder="Last Name" ng-model="txtLname" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtEmail">Email Id:</label>
+                        <div class="left-inner-addon">
+                            <i class="glyphicon glyphicon-envelope icon-envelope"></i>
+                            <input type="email" class="form-control" placeholder="Email Id" ng-model="txtEmailId" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtPassword">Password:</label>
+                        <div class="left-inner-addon">
+                            <i class="glyphicon glyphicon-lock icon-lock"></i>
+                            <input type="password" class="form-control" placeholder="Password" ng-model="txtpassword" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtCnfPassword">Confirm Password:</label>
+                        <div class="left-inner-addon">
+                            <i class="glyphicon glyphicon-repeat icon-repeat"></i>
+                            <input type="password" class="form-control" placeholder="Confirm Password" ng-model="txtCnfPassword" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtMobile">Mobile No:</label>
+                        <div class="left-inner-addon">
+                            <i class="glyphicon glyphicon-phone icon-phone"></i>
+                            <input type="number" class="form-control" placeholder="Mobile" ng-model="txtmobile" />
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-success" style="margin-bottom: 15px;" value="Submit Your Message" ng-click="signUp()" />
+                    <button type="submit" ng-click="signUp()" class="btn btn-success" style="margin-bottom:10px;">Sign Up</button>
+                </form>-->
+                <form class="form" name="myform" novalidate>
+                    <div class="form-group">
+                        <label for="txtFname">First Name:</label>
+                        <div class="left-inner-addon">
+                            <i class="glyphicon glyphicon-user icon-user"></i>
+                            <input type="text" class="form-control" placeholder="First Name" ng-model="txtFname" name="txtFname" required ng-class="{'form-error':submitted && myform.txtFname.$error.required}" />
+                            <span class="error-message" ng-show="submitted && myform.txtFname.$error.required">Please enter your first name.</span>
+                        </div>
+                     </div>
+                    <div class="form-group">
+                        <label for="txtLname">Last Name:</label>
+                        <div class="left-inner-addon">
+                            <i class="glyphicon glyphicon-user icon-user"></i>
+                            <input type="text" class="form-control" placeholder="Last Name" ng-model="txtLname" name="txtLname" ng-class="{'form-error':submitted && myform.txtLname.$error.required}" required/>
+                            <span class="error-message" ng-show="submitted && myform.txtLname.$error.required">Please enter your last name</span>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <label for="txtEmail">Email Id:</label>
+                            <div class="left-inner-addon">
+                                <i class="glyphicon glyphicon-envelope icon-envelope"></i>
+                                <input type="email" class="form-control" id="txtEmail" placeholder="Email Id" required ng-model="txtEmail" name="txtEmail" ng-class="{'form-error':submitted && myform.txtEmail.$error.required || myform.txtEmail.$error.email}" />
+                                <span class="error-message" ng-show="submitted && myform.txtEmail.$error.required">Please enter your email id.</span>
+                                <span class="error-message" ng-show="submitted && myform.txtEmail.$error.email ||myform.txtEmail.$error.email">Please choose coorect email id.</span>
+                            </div>
+                        </div>
+                    <div class="form-group">
+                        <label for="txtPassword">Password:</label>
+                        <div class="left-inner-addon">
+                            <i class="glyphicon glyphicon-lock icon-lock"></i>
+                            <input type="password" class="form-control" placeholder="Password" ng-model="txtpassword" name="txtpassword" ng-class="{'form-error':submitted && myform.txtpassword.$error.required}" required/>
+                            <span class="error-message" ng-show="submitted && myform.txtpassword.$error.required">Please choose pssword</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtCnfPassword">Confirm Password:</label>
+                        <div class="left-inner-addon">
+                            <i class="glyphicon glyphicon-repeat icon-repeat"></i>
+                            <input type="password" class="form-control" placeholder="Confirm Password" ng-model="txtCnfPassword" name="txtCnfPassword" ng-class="{'form-error':submitted && myform.txtCnfPassword.$error.required}" required/>
+                            <span class="error-message" ng-show="submitted && myform.txtCnfPassword.$error.required">Please confirm password</span>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <label for="txtMobile">Mobile:</label>
+                            <div class="left-inner-addon">
+                                <i class="glyphicon glyphicon-phone icon-phone"></i>
+                                <input type="number" class="form-control" ng-model="txtMobile" id="txtMobile" name="mobile" required ng-class="{'form-error':submitted && myform.mobile.$error.required || myform.mobile.$error.number}" style="width:262px;" />
+                                <span class="error-message" ng-show="submitted && myform.mobile.$error.required">Please enter your mobile no.</span>
+                                <span class="error-message" ng-show="submitted && myform.mobile.$error.number || myform.mobile.$error.number">Please enter correct mobile no.</span>
+                            </div>
+                        </div>
+                    <div class="form-group">
+                        <label for="txtSecQuestion">Choose Security Question:</label>
+                        <select class="form-control" ng-model="txtsecQuestion">
+                            <option>What is your date of birth</option>
+                            <option>What is your father name</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Security Answer:</label>
+                        <input type="text" class="form-control" ng-model="txtsecAnswer"/>
+                    </div>
+                        <input type="submit" class="btn btn-success" style="margin-bottom: 15px;" value="Sign Up" ng-click="signUp()" />
+               </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+    </div>
+</div>

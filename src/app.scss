@@ -1,0 +1,13 @@
+@import "core/styles/variables";
+
+@import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+
+@import "core/styles/core";
+
+@import "components/login/login";
+@import "components/patientRegistration/patientRegistration";
+@import "components/billSection/bill";
+@import "components/paymentSection/payment";
+@import "components/userRegistration/signUp";
+
+

@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="login-form-continer">
+            <div id="LoginHeader">
+                <h4>Log in to get access</h4>
+            </div>
+            <div class="login" style="margin: 20px;">
+                <form name="loginForm" class="form" novalidate>
+                    <div class="form-group">
+                        <label for="txtEmail">Email Id:</label>
+                        <div class="left-inner-addon">
+                            <i class="glyphicon glyphicon-envelope icon-envelope"></i>
+                            <input type="email" class="form-control" placeholder="Email Id" ng-model="txtEmailId" name="txtEmailId" ng-class="{'form-error':submitted && loginForm.txtEmailId.$error.required || loginForm.txtEmailId.$error.email}" required />
+                            <span class="error-message" ng-show="submitted && loginForm.txtEmailId.$error.required">Please enter email id</span>
+                            <span class="error-message" ng-show="submitted && loginForm.txtEmailId.$error.email || loginForm.txtEmailId.$error.email">Please enter correct email id</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtPassword">Password:</label>
+                        <div class="left-inner-addon">
+                            <i class="glyphicon glyphicon-lock icon-lock"></i>
+                            <input type="password" class="form-control" placeholder="Password" ng-model="txtpassword" name="txtpassword" ng-class="{'form-error':submitted && loginForm.txtpassword.$error.required}" required/>
+                            <span class="error-message" ng-show="submitted && loginForm.txtpassword.$error.required">Please enter password</span>
+                        </div>
+                    </div>
+                    <input type="submit" ng-click="login()" class="btn btn-success" style="margin-bottom:10px;" value="Sign In" />
+                    <a href="/#SignUp" style="margin-left:20px;"><span class="glyphicon glyphicon-user"></span>Not an user? Sign Up Here</a>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+    </div>
+</div>

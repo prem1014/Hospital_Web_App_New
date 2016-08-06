@@ -1,0 +1,216 @@
+<div class="col-lg-12">
+    <div class="form-continer">
+        <div id="formHeader">
+            <h4>Payment Recieved Form</h4>
+        </div>
+        <form class="form-horizontal" role="form" style="margin:10px;" name="searchForm" novalidate>
+            <div class="form-group search-section">
+                <div>
+                    <label class="control-label col-sm-2" for="pId">Patient/Reciept No:</label>
+                </div>
+                <div class="col-sm-4">
+                    <div class="inner-addon right-inner-addon">
+                        <i class="glyphicon glyphicon-search"></i>
+                        <input type="text" class="form-control" ng-model="searchItem" name="searchItem" placeholder="Enter Patient Id or Reciept No to search"
+                               ng-keypress="search($event)" required ng-class="{'form-error':srchFrmSubmitted && searchForm.searchItem.$error.required}">
+                        <span class="error-message" ng-show="srchFrmSubmitted && searchForm.searchItem.$error.required">Enter valid Patient Id or Reciept No to search</span>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <img src="../Image/012_refresh-128.png" style="width:23%;cursor:pointer" ng-click="refreshData()" />
+                </div>
+            </div>
+        </form>
+        <form class="form-horizontal" role="form" style="margin:10px;" name="paymentForm" novalidate ng-submit="addNewPayment()">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="patientId">Patient ID:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="patientId" tabindex="0" name="patientId" readonly />
+                </div>
+                <label class="control-label col-sm-2" for="patientName">Patient Name:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="patientName" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="recieptNo">Reciept No:</label>
+                <div class="col-sm-4">
+                    <input type="text" ng-model="recieptNo" tabindex="1" class="form-control" readonly />
+                </div>
+
+                <label class="control-label col-sm-2" for="attendantName">Attendant Name:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="attendantName" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="dateOfAdmit">Payment Date:</label>
+                <div class="col-sm-4">
+                    <p class="input-group">
+                        <input type="text" class="form-control" ng-model="dt" is-open="popup.opened"
+                               datepicker-options="dateOptions" uib-datepicker-popup="{{formats}}" ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDatePickerPopup()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+                <label class="control-label col-sm-2" for="contactNo">Contact No:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="contactNo" readonly />
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="pType">Patient Type:</label>
+                <div class="col-sm-4">
+                    <input type="text" ng-model="patientType" class="form-control" readonly />
+                </div>
+                <label class="control-label col-sm-2" for="age"> Age/Sex:</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" ng-model="age" readonly>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" ng-model="sex" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="amountDue">Amount After Pay:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="amountDue" readonly />
+                </div>
+                <label class="control-label col-sm-2" for="remarks">Remarks:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" maxlength="100" ng-model="remarks" />
+                </div>
+            </div>
+            <div style="background: #00BCD4;margin-bottom: 12px;border: 6px solid green;">
+                <div class="form-group" style="margin:2px;margin-top:10px;">
+                    <label class="control-label col-sm-2" for="balanceAmount">Balance Amount:</label>
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="balanceAmount" class="form-control" readonly />
+                    </div>
+                    <label class="control-label col-sm-2" for="payNow">Pay Now:</label>
+                    <div class="col-sm-4">
+                        <input type="number" ng-model="payNow" name="payNow" required class="form-control" maxlength="6" ng-change="GetAmountDue()"
+                                ng-class="{'form-error':submitted && paymentForm.payNow.$error.required}" min="0"/>
+                        <span class="error-message" ng-show="submitted && paymentForm.payNow.$error.required">Please enter amount</span>
+                        <span class="error-message" ng-show="submitted && paymentForm.payNow.$error.min">
+                            Please enter amount 0 or more than 0
+                        </span>
+                     </div>
+                </div>
+            </div>
+            <div class="btn-panel">
+                <div class="form-group" style="margin-top:11px;">
+                    <div class="col-sm-2">
+
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-success" style="margin-bottom:5px;" ng-disabled="isAddPatientDisabled">Add New Payment</button>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-info" style="margin-bottom:5px;" ng-click="updatePayment()" ng-disabled="isUpdateDisabled">Update Payment</button>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-info" style="margin-bottom:5px; width:50px" ng-click="printData()" ng-disabled="isDisabled">Print</button>
+                    </div>
+                    <div class="col-sm-1">
+                        <button type="button" class="btn btn-danger" style="margin-bottom:5px;" ng-click="deletePayment()" ng-disabled="isDeleteDisabled">Delete Payment</button>
+                    </div>
+                </div>
+            </div>
+            <print-data></print-data>
+           <!-- <div id="dvContents" ng-show="IsDivPrint">
+                <div style="border-bottom:2px solid;margin-bottom:10px;">
+                    <h2 style="text-align:center;">MAHILA SEVA SADAN</h2>
+                    <h4 style="text-align:center;">DAINVI ROAD, DARBHANGA</h4>
+                    <h4 style="text-align:center;">PAYMENT SLIP</h4>
+                </div>
+                <div style="border-bottom:2px solid;">
+                    <table class="table table-striped table-bordered table-hover table-responsive">
+                        <tr style="height:33px">
+                            <td width="130px">
+                                <label>Patient Id:</label>
+                            </td>
+                            <td width="300px">
+                                <label>{{patientId}}</label>
+                            </td>
+                            <td width="130px">
+                                <label>Payment Date:</label>
+
+                            </td>
+                            <td width="150">
+                                <label>{{dt | date:'dd-MM-yyyy'}}</label>
+                            </td>
+                        </tr>
+                        <tr style="height:33px">
+                            <td>
+                                <label>Patient Name:</label>
+                            </td>
+                            <td>
+                                <label>{{patientName}}</label>
+                            </td>
+                            <td>
+                                <label>Age/Sex:</label>
+                            </td>
+                            <td>
+                                {{age}} ,  {{sex == "M" ? 'Male':'Female'}}
+                            </td>
+                        </tr>
+                        <tr style="height:33px">
+                            <td>
+                                <label>Attendant Name:</label>
+                            </td>
+                            <td>
+                                <label>{{attendantName}}</label>
+                            </td>
+                            <td>
+                                <label>Contact Numaber:</label>
+                            </td>
+                            <td>
+                                <label>{{contactNo}}</label>
+                            </td>
+                        </tr>
+                        <tr style="height:33px">
+                            <td>
+                                <label>Address:</label>
+                            </td>
+                            <td>
+                                <label>{{address}}</label>
+                            </td>
+                            <td>
+                                <label>Type:</label>
+                            </td>
+                            <td>
+                                <label>{{patientType == 1 ? 'OPD':'IPD'}}</label>
+                            </td>
+                        </tr>
+                        <tr style="height:33px">
+                            <td>
+                                <label>Remarks:</label>
+                            </td>
+                            <td>
+                                <label>{{remarks}}</label>
+                            </td>
+                            <td>
+                                <label>Payment Amount:</label>
+                            </td>
+                            <td>
+                                <label>{{payNow}}</label>
+                            </td>
+                        </tr>
+
+                        <tr style="height:33px">
+                            <td>
+                                <br />
+                                <br />
+                                Signature
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>-->
+        </form>
+    </div>
+</div>
